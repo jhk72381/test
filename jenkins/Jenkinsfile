@@ -1,0 +1,39 @@
+ pipeline {
+
+    agent any
+    
+    environment {
+        PASS = credentials('registry-pass') 
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                sh '''
+                    make clean all
+
+                '''
+            }
+
+            post {
+                success {
+                   echo success
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh './a.out'
+            }
+
+            post {
+                always {
+                    echo test
+                }
+            }
+        }
+
+    }
+}
