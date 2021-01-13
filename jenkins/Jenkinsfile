@@ -11,8 +11,8 @@
         stage('Build') {
             steps {
                 sh '''
+                    ls
                     make clean all
-
                 '''
             }
 
